@@ -1,0 +1,5 @@
+.env
+guilds/
+
+.vscode/
+__pycache__/
