@@ -10,7 +10,7 @@ from helpers import error, generate_embed_and_components, ButtonData
 
 # Load the token from the .env file
 load_dotenv()
-TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("ROLES_DISCORD_TOKEN")
 
 # The test guild ID (only for development)
 TEST_GUILDS = None
