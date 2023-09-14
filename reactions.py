@@ -34,7 +34,27 @@ message_buttons: dict[int, list[str]] = {}
 button_data: dict[str, ButtonData] = {}
 
 
-# TODO: ensure no duplicate labels
+async def render_message(messageid: int, inter: disnake.ApplicationCommandInteraction | disnake.MessageInteraction):
+    """
+    Recomputes the message with the given ID.
+    """
+    # lock message buttons dict, get buttons
+    with message_buttons_lock:
+        buttons = [button_data[button_id] for button_id in message_buttons[messageid]]
+
+        # add message if it doesn't exist, edit if it does, delete if it exists and now has no buttons
+        if len(buttons) < 1 and messageid in message_buttons:
+            del message_buttons[messageid]
+            await (await inter.channel.fetch_message(messageid)).delete()
+        elif len(buttons) > 0:
+            embed, components = generate_embed_and_components(buttons)
+            await (await inter.channel.fetch_message(messageid)).edit(
+                embed=embed, components=components
+            )
+
+
+# TODO: test adding duplicate labels fails
+
 @bot.slash_command()
 async def addnewrolebutton(
     inter: disnake.ApplicationCommandInteraction,
@@ -80,6 +100,17 @@ async def addnewrolebutton(
     with message_buttons_lock:
         # if we already sent a message in this channel, edit it
         if message_id is not None and message_buttons.get(message_id):
+
+            # check if a button with this label is already on the message
+            for but in message_buttons[message_id]:
+                if button_data[but].label == label:
+                    await error(
+                        inter,
+                        message="A button with this label already exists in this channel!",
+                    )
+                    return
+
+
             message_buttons[message_id].append(button.custom_id)
 
             buts = [button_data[but] for but in message_buttons[message_id]]
@@ -209,7 +240,7 @@ async def on_dropdown(inter: disnake.MessageInteraction):
         # lock message buttons dict, remove button from message
         assert inter.guild_id
         assert inter.guild
-        chan = inter.guild.get_channel(inter.channel.id)
+        chan = inter.guild.get_channel(inter.channel.id) # TODO: channel needs to be previously requested channel
         assert type(chan) is disnake.TextChannel
 
         message_id = None
