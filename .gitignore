@@ -3,3 +3,4 @@ guilds/
 
 .vscode/
 __pycache__/
+temp_vc_data.json

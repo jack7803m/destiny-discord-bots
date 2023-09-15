@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import random
 import time
 import os
+from helpers import log
 
 # Load the token from the .env file
 load_dotenv()
@@ -22,10 +23,6 @@ intents.presences = True
 intents.message_content = True
 
 bot = commands.InteractionBot(test_guilds=TEST_GUILDS, intents=intents)
-
-# log message with formatted timestamp
-def log(message: str):
-    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}] {message}")
 
 def create_embed() -> disnake.Embed:
     embed = disnake.Embed(title="Vex Incursion Incoming!",
