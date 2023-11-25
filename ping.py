@@ -1,3 +1,4 @@
+
 import disnake
 from disnake.ext import commands
 from dotenv import load_dotenv
@@ -11,16 +12,17 @@ from helpers import log
 load_dotenv()
 TOKEN = os.getenv("ROLES_DISCORD_TOKEN")
 
-# The test guild ID (only for development)
-TEST_GUILDS = None
-TEST_GUILDS = [1146525933965160479]
-
-TARGET_MEMBER = 358609857646952448
+TEST_GUILDS = os.getenv("TEST_GUILD")
+TARGET_MEMBER = os.getenv("PING_TARGET")
 
 intents = disnake.Intents.default()
 intents.members = True
 intents.presences = True
 intents.message_content = True
+
+# ! We do a little trolling
+# ! (Just a bit)
+# ! This bot pings a specific user when they go offline to mimic an event happening *just* after they went offline.
 
 bot = commands.InteractionBot(test_guilds=TEST_GUILDS, intents=intents)
 

@@ -3,8 +3,6 @@ from disnake.ext import commands
 from dotenv import load_dotenv
 
 import os
-import sys
-import threading
 import time
 
 from helpers import error, log
@@ -13,10 +11,10 @@ from helpers import error, log
 load_dotenv()
 TOKEN = os.getenv("ROLES_DISCORD_TOKEN")
 
-# The test guild ID (only for development)
-TEST_GUILDS = None
-TEST_GUILDS = [1146525933965160479]
 
+TEST_GUILDS = os.getenv("TEST_GUILD")
+
+# TODO: make this configurable in the slash command
 VOUCH_FOR_ROLE_DEFAULT = 1152024701808418827
 VOUCHES_REQUIRED = 3
 

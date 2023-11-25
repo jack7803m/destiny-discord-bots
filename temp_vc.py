@@ -12,7 +12,7 @@ from itertools import chain
 load_dotenv()
 TOKEN = os.getenv("TEMP_CHANNELS_DISCORD_TOKEN")
 
-TEST_GUILDS = [1146525933965160479]
+TEST_GUILDS = os.getenv("TEST_GUILD")
 
 bot = commands.InteractionBot(test_guilds=TEST_GUILDS)
 
