@@ -1,12 +1,12 @@
 # Destiny Discord Bots
 
-## Description
+> Fair warning: these bots aren't really Destiny-focused. If you're looking for anything to interface with Destiny or Bungie APIs, you won't find that here. These are just some bots I made for a Destiny-oriented server for me and my friends.
 
-> Fair warning: these bots aren't really Destiny-focused. If you're looking for anything to interface with Destiny or Bungie APIs, you won't find that here. These are just some bots I made for a Destiny-oriented server for me and my friends. 
+## Description
 
 This project consists of several Python scripts that interact with the Discord API using the Disnake library. The scripts perform various tasks such as managing roles and handling temporary voice channels.
 
-I wrote these scripts primarily for a Destiny-focused gaming server for me and my friends, but they should be applicable to other things as well with some small modifications - I particularly like the temporary VC bot, it allows the server to scale dynamically quite nicely. For a large server it would probably need some optimizations (potentially a database instead of a little json file, as well as some error-checking to remove orphaned VCs if the bot gets rate-limited or something), but for a relatively small or quiet server it works great as is. 
+I wrote these scripts primarily for a Destiny-focused gaming server for me and my friends, but they should be applicable to other things as well with some small modifications - I particularly like the temporary VC bot, it allows the server to scale dynamically quite nicely. For a large server it would probably need some optimizations (potentially a database instead of a little json file, as well as some error-checking to remove orphaned VCs if the bot gets rate-limited or something), but for a relatively small or quiet server it works great as is.
 
 ## Installation
 
